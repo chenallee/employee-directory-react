@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "firstName": "Shouyou",
+    "lastName": "Hinata",
+    "department": "First-Year",
+    "role": "Wing Spiker",
+    "location": "Karasuno"
+  },
+  {
+    "id": 2,
+    "firstName": "Tobio",
+    "lastName": "Kageyama",
+    "department": "First-Year",
+    "role": "Setter",
+    "location": "Karasuno"
+  },
+  {
+    "id": 3,
+    "firstName": "Daichi",
+    "lastName": "Sawamura",
+    "department": "Third-Year",
+    "role": "Wing Spiker",
+    "location": "Karasuno"
+  },
+  {
+    "id": 4,
+    "firstName": "Koushi",
+    "lastName": "Sugawara",
+    "department": "Third-Year",
+    "role": "Setter",
+    "location": "Karasuno"
+  },
+  {
+    "id": 5,
+    "firstName": "Kenma",
+    "lastName": "Kozume",
+    "department": "Second-Year",
+    "role": "Setter",
+    "location": "Nekoma"
+  },
+  {
+    "id": 6,
+    "firstName": "Tetsurou",
+    "lastName": "Kuroo",
+    "department": "Third-Year",
+    "role": "Middle Blocker",
+    "location": "Nekoma"
+  },
+  {
+    "id": 7,
+    "firstName": "Lev",
+    "lastName": "Haiba",
+    "department": "First-Year",
+    "role": "Middle Blocker",
+    "location": "Nekoma"
+  },
+  {
+    "id": 8,
+    "firstName": "Hajime",
+    "lastName": "Iwaizumi",
+    "department": "Third-Year",
+    "role": "Wing Spiker",
+    "location": "Aobajohsai"
+  },
+  {
+    "id": 9,
+    "firstName": "Touru",
+    "lastName": "Oikawa",
+    "department": "Third-Year",
+    "role": "Setter",
+    "location": "Aobajohsai"
+  },
+  {
+    "id": 10,
+    "firstName": "Kentarou",
+    "lastName": "Kyoutani",
+    "department": "Second-Year",
+    "role": "Wing Spiker",
+    "location": "Aobajohsai"
+  }
+]
