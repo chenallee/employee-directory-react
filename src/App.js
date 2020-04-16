@@ -17,11 +17,51 @@ class App extends React.Component {
   handleChange = event => {
     let value = event.target.value;
     const name = event.target.name;
-    
+
     this.setState({
       [name]: value
     });
+
+    //this should also call 
+    this.renderEmployees();
   };
+
+  returnEmployeeCard = (employee) => {
+    return (
+      <EmployeeCard
+        key={employee.id}
+        firstName={employee.firstName}
+        lastName={employee.lastName}
+        department={employee.department}
+        role={employee.role}
+        location={employee.location}
+      />
+    );
+  }
+
+  renderEmployees = () => {
+    //sort employees
+
+    //IF employee[this.state.searchSetting] -> return employees where employee[this.state.searchSetting] includes this.state.searchTerm
+    //ELSE return employees where any attr includes this.state.searchTerm
+    return this.state.employees.map((employee) => {
+
+      if (employee[this.state.searchSetting]) {
+        if (this.state.searchTerm === '' || employee[this.state.searchSetting].toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+          return this.returnEmployeeCard(employee);
+        } else {
+          return;
+        }
+      } else if (employee.firstName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.lastName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.role.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.department.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
+        return this.returnEmployeeCard(employee);
+      } else {
+        return; //has to return no matter what
+      }
+      //right now, if no searchSetting is specified or if the employee's property from searchSetting includes searchTerm, return employeeCard. 
+      //we want it to be... if no searchSetting is specified return employeeCard that contains searchTerm in any of its properties // if searchSetting is specified return employeeCard that contains searchTerm in the specified property     
+    }
+    )
+  }
 
   render() {
     return (
@@ -35,7 +75,7 @@ class App extends React.Component {
                 <input type="text" name='searchTerm' placeholder="Search..." className='form-control' value={this.state.searchTerm} onChange={this.handleChange} />
                 <div className="input-group-append" >
                   <select className='form-control' id='searchSetting' name='searchSetting' value={this.state.searchSetting} onChange={this.handleChange} >
-                    <option disabled value='searchBy'>Search by...</option>
+                    <option value='searchBy'>Search by...</option>
                     <option value="firstName">First Name</option>
                     <option value="lastName">Last Name</option>
                     <option value="department">Department</option>
@@ -57,7 +97,7 @@ class App extends React.Component {
                   <option value="role">Role</option>
                   <option value="location">Location</option>
                 </select>
-                {/* do we also want a asc/desc button? */}
+                {/* sort by ascending or descending */}
                 <div className="input-group-append">
                   <label className="btn btn-secondary">
                     <input type="radio" name="sortOrder" id="asc" value='asc' checked={this.state.sortOrder === 'asc'} onChange={this.handleChange} /> Asc</label>
@@ -73,24 +113,7 @@ class App extends React.Component {
 
         </form>
 
-
-
-
-
-        {this.state.employees.map((employee) => {
-          //return if employee.searchSetting includes searchTerm or if searchTerm is blank
-          return (
-            <EmployeeCard
-              key={employee.id}
-              firstName={employee.firstName}
-              lastName={employee.lastName}
-              department={employee.department}
-              role={employee.role}
-              location={employee.location}
-            />
-          );
-        }
-        )}
+        {this.renderEmployees()}
       </Wrapper>
     )
   }

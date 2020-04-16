@@ -13,13 +13,13 @@ function EmployeeCard(props) {
             <strong>Name:</strong> {props.firstName} {props.lastName}
           </li>
           <li>
-            <strong>Year:</strong> {props.department}
+            <strong>Department:</strong> {props.department}
           </li>
           <li>
-            <strong>Position:</strong> {props.role}
+            <strong>Role:</strong> {props.role}
           </li>
           <li>
-            <strong>School:</strong> {props.location}
+            <strong>Location:</strong> {props.location}
           </li>
         </ul>
       </div>
