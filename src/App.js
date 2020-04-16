@@ -39,28 +39,62 @@ class App extends React.Component {
     );
   }
 
+  sortEmployees = () => {
+    let sortSetting = this.state.sortSetting;
+
+    this.state.employees.sort((a, b) => {
+      let propA;
+      let propB;
+      //if no sortSetting is specified, we'll sort by id
+      if (this.state.sortSetting === 'sortBy') {
+        propA = a.id;
+        propB = b.id;
+        //if sortsetting is a str, lets do the value to lowercase
+      } else {
+        propA = a[sortSetting].toLowerCase();
+        propB = b[sortSetting].toLowerCase();
+      }
+
+      if (this.state.sortOrder === 'asc') {
+        if (propA < propB) {
+          return -1;
+        }
+        if (propA > propB) {
+          return 1;
+        }
+        return 0;
+      } else if (this.state.sortOrder === 'desc') {
+        if (propA < propB) {
+          return 1;
+        }
+        if (propA > propB) {
+          return -1;
+        }
+        return 0;
+
+      }
+
+    })
+  }
+
   renderEmployees = () => {
     //sort employees
-
+    this.sortEmployees();
     //IF employee[this.state.searchSetting] -> return employees where employee[this.state.searchSetting] includes this.state.searchTerm
     //ELSE return employees where any attr includes this.state.searchTerm
     return this.state.employees.map((employee) => {
 
+      /* I WANT TO REVISIT THIS AND MAKE IT CLEANER */
       if (employee[this.state.searchSetting]) {
         if (this.state.searchTerm === '' || employee[this.state.searchSetting].toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
           return this.returnEmployeeCard(employee);
-        } else {
-          return;
         }
       } else if (employee.firstName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.lastName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.role.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.department.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
         return this.returnEmployeeCard(employee);
-      } else {
-        return; //has to return no matter what
       }
-      //right now, if no searchSetting is specified or if the employee's property from searchSetting includes searchTerm, return employeeCard. 
-      //we want it to be... if no searchSetting is specified return employeeCard that contains searchTerm in any of its properties // if searchSetting is specified return employeeCard that contains searchTerm in the specified property     
-    }
-    )
+
+    })
+
   }
 
   render() {
