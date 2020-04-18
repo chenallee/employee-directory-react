@@ -11,7 +11,7 @@ class App extends React.Component {
     searchTerm: '',
     searchSetting: 'searchBy', //this doesn't actually let us search by anything just shows placeholder
     sortSetting: 'sortBy', //this doesn't actually let us sort by anything just shows placeholder
-    sortOrder: 'asc',
+    sortOrder: 'asc', //we sort ascending by default
   };
 
   handleChange = event => {
@@ -30,6 +30,7 @@ class App extends React.Component {
     return (
       <EmployeeCard
         key={employee.id}
+        image={employee.imgUrl}
         firstName={employee.firstName}
         lastName={employee.lastName}
         department={employee.department}
@@ -45,6 +46,7 @@ class App extends React.Component {
     this.state.employees.sort((a, b) => {
       let propA;
       let propB;
+
       //if no sortSetting is specified, we'll sort by id
       if (this.state.sortSetting === 'sortBy') {
         propA = a.id;
@@ -92,18 +94,16 @@ class App extends React.Component {
       } else if (employee.firstName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.lastName.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.location.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.role.toLowerCase().includes(this.state.searchTerm.toLowerCase()) || employee.department.toLowerCase().includes(this.state.searchTerm.toLowerCase())) {
         return this.returnEmployeeCard(employee);
       }
-
     })
-
   }
 
   render() {
     return (
       <Wrapper>
-        <h1 className="title">Employees</h1>
+        <h1 className="title text-light">💼 Employees</h1>
         <form className=''>
           <div className="row">
-            <div className="col-7">
+            <div className="col-12 col-md-7">
               {/* filter */}
               <div className="form-group form-inline">
                 <input type="text" name='searchTerm' placeholder="Search..." className='form-control' value={this.state.searchTerm} onChange={this.handleChange} />
@@ -119,10 +119,9 @@ class App extends React.Component {
                 </div>
               </div>
             </div>
-            <div className="col-5">
+            <div className="col-12 col-md-5">
               {/* sort */}
               <div className="form-group form-inline">
-                {/* <label for="sort">Sort: </label> */}
                 <select id="sort" className='form-control' name='sortSetting' value={this.state.sortSetting} onChange={this.handleChange}>
                   <option disabled value='sortBy'>Sort by...</option>
                   <option value="firstName">First Name</option>
@@ -133,9 +132,9 @@ class App extends React.Component {
                 </select>
                 {/* sort by ascending or descending */}
                 <div className="input-group-append">
-                  <label className="btn btn-secondary">
+                  <label className={`form-control btn ${this.state.sortOrder === 'asc' ? 'btn-warning' : 'btn-outline-warning'}`}>
                     <input type="radio" name="sortOrder" id="asc" value='asc' checked={this.state.sortOrder === 'asc'} onChange={this.handleChange} /> Asc</label>
-                  <label className="btn btn-secondary">
+                  <label className={`form-control btn ${this.state.sortOrder === 'desc' ? 'btn-warning' : 'btn-outline-warning'}`}>
                     <input type="radio" name="sortOrder" id="desc" value='desc' checked={this.state.sortOrder === 'desc'} onChange={this.handleChange} /> Desc</label>
 
                 </div>
@@ -152,26 +151,5 @@ class App extends React.Component {
     )
   }
 }
-
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <img src={logo} className="App-logo" alt="logo" />
-//         <p>
-//           Edit <code>src/App.js</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
 
 export default App;
