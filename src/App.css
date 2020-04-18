@@ -20,19 +20,19 @@ label {
 
 /* styling form */
   .form-control[name='searchTerm']{
-    width: 65%;
+    width: 60%;
   }
   .form-control[name='searchTerm'] + .input-group-append{
-    width: 35%;
+    width: 40%;
   }
   .form-control[name='searchTerm'] + .input-group-append > select{
     width: 100%;
   }
   .form-control[name='sortSetting']{
-    width: 70%;
+    width: 55%;
   }
   .form-control[name='sortSetting'] + .input-group-append{
-    width: 30%;
+    width: 45%;
   }
   .input-group-append > .btn {
     width: 50%;
